@@ -7,13 +7,13 @@ import { Building, Phone, MapPin, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from '@repo/ui/components/button';
 
-interface PageProps {
+interface HopitalPageProps {
   params: {
     slug: string;
   };
 }
 
-export default function HopitalPage({ params }: PageProps) {
+export default function HopitalPage({ params }: HopitalPageProps) {
   const hopital = hopitaux.find(h => h.slug === params.slug);
 
   if (!hopital) {
