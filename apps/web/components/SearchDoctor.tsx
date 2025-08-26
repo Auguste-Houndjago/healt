@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@repo/ui/components/button';
 import { Input } from '@repo/ui/components/input';
 import {
@@ -10,22 +10,19 @@ import {
   SelectContent,
   SelectItem,
 } from '@repo/ui/components/select';
+import { specialities } from './spacialites/mock';
+import { useSearchStore } from './hooks/useSearchStore';
 
 export default function SearchDoctor() {
-  const [location, setLocation] = useState('');
-  const [condition, setCondition] = useState('');
-  const [category, setCategory] = useState('');
+  const { location, nom, speciality, setLocation, setNom, setSpeciality, reset } = useSearchStore();
 
-  const handleSearch = () => {
-    console.log({ location, condition, category });
+  const handleReset = () => {
+    reset();
   };
 
   return (
-    <div className=" flex flex-col gap-4">
-      {/* <h3 className="text-foreground font-semibold text-lg">Find Your Doctor</h3> */}
-
-      {/* Location + Condition sur la même ligne même sur petit écran */}
-      <div className="flex gap-3 items-center flex-wrap bg-background rounded-md p-2  shadow-lg">
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-3 items-center flex-wrap bg-background rounded-md p-2 shadow-lg">
         <div className="flex">
           <Input
             type="text"
@@ -39,31 +36,32 @@ export default function SearchDoctor() {
         <div className="flex">
           <Input
             type="text"
-            placeholder="Condition"
-            value={condition}
-            onChange={(e) => setCondition(e.target.value)}
+            placeholder="Nom de l'hôpital"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
             className="w-full"
           />
         </div>
-          <div className="flex-1 min-w-[120px]">
-        <Select value={category} onValueChange={setCategory}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="cardiology">Cardiology</SelectItem>
-            <SelectItem value="orthopedics">Orthopedics</SelectItem>
-            <SelectItem value="internal">Internal Medicine</SelectItem>
-            <SelectItem value="pulmonology">Pulmonology</SelectItem>
-          </SelectContent>
-        </Select>
+        
+        <div className="flex-1 min-w-[120px]">
+          <Select value={speciality} onValueChange={setSpeciality}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Specialites" />
+            </SelectTrigger>
+            <SelectContent>
+              {specialities.map((speciality) => (
+                <SelectItem key={speciality.id} value={speciality.id|| "1"}>
+                  {speciality.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <Button size="lg" variant="outline" className="self-start" onClick={handleReset}>
+          Reset
+        </Button>
       </div>
-      <Button size="lg"  className="self-start   " onClick={handleSearch}>
-            Search
-      </Button>
-      </div>
-
-
     </div>
   );
 }
