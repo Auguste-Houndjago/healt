@@ -2,6 +2,7 @@
 import React from 'react';
 
 import SearchDoctor from '../SearchDoctor';
+import Image from 'next/image';
 
 interface HeroSectionProps {
     className?: string;
@@ -27,9 +28,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     </div>
 
                         {/* gauche  */}
-                    <div className='flex-1 flex overflow-hidden relative w-full border bg-background border-red-300 h-full '>
-                                     <div className="bg-radial-[at_65%_25%] to-background/5 z-1 -inset-17 absolute from-transparent to-40%"></div>
-                        <h1 className='rounded-lg'>image ici</h1>
+                    <div className='flex-1 flex overflow-hidden relative w-full isolate h-full '>
+                     
+
+                         <Image src="/hero.jpg" alt="Description de l'image" width={100} height={200}  className="object-cover rounded-lg w-full h-auto " />
                     </div>
 
 

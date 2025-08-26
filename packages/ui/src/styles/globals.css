@@ -32,6 +32,41 @@
   background-repeat: repeat;
 }
 
+/* globals.css */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  flex: 0 0 auto;
+  min-width: 100%;
+  animation: marquee var(--duration, 30s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  flex: 0 0 auto;
+  min-width: 100%;
+  animation: marquee-reverse var(--duration, 30s) linear infinite;
+}
+
+.hover\:\[animation-play-state\:paused\]:hover {
+  animation-play-state: paused;
+}
+
 
 :root {
   --background: oklch(1 0 0);

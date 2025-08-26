@@ -6,6 +6,7 @@ import { cn } from '@repo/ui/lib/utils';
 import { specialities } from './mock';
 import { useSearchStore } from '../hooks/useSearchStore';
 import HopitalCard from '../hopital/HopitalCard';
+import { SpecialityMarquee } from './SpecialityMarquee';
 
 export default function SpecialiterListe() {
   const { filteredHopitaux, location, nom, speciality } = useSearchStore();
@@ -21,13 +22,8 @@ export default function SpecialiterListe() {
       {/* Affichage des spécialités si pas de recherche active */}
       {!hasActiveSearch && (
         <div className="flex w-full justify-center items-center overflow-hidden scrollbar-hidden overflow-x-scroll scroll">
-          <div className={cn("flex justify-center items-center gap-8")}>
-            {specialities?.map((specialite) => (
-              <SpecialityCard 
-                key={specialite.id} 
-                {...specialite} 
-              />
-            ))}
+          <div className={cn("flex justify-center items-center max-w-7xl gap-8")}>
+            <SpecialityMarquee specialities={specialities} />
           </div>
         </div>
       )}
